@@ -31,6 +31,9 @@ def download_answer_files(cloud_url, path_to_data_folder, respondent_index):
                 
             except requests.RequestException as e:
                 print(f"Failed: {url}: {e}")
+                raise
+
+    return path_to_data_folder
 
 
 def collate_answer_files(data_folder_path):
@@ -64,3 +67,5 @@ Creates:
             i += 1
 
     print(f"Collated answers saved in {output_file}")
+    return output_file
+
