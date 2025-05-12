@@ -1,39 +1,26 @@
 import os
 import requests
 
+import os
+
 def download_answer_files(cloud_url, path_to_data_folder, respondent_index):
-    """Downloads answer files from a cloud URL and saves them locally with standardized filenames.
+    """Simulates downloading answer files by copying from a local folder instead of downloading from the cloud."""
 
-    Parameters:
-        cloud_url (str): The base URL from which to download files (e.g., 'https://example.com').
-        path_to_data_folder (str): The local directory where the files will be saved (e.g., 'data/').
-        respondent_index (int): The total number of respondent files to download (e.g., 40).
+    source_folder = cloud_url  # here, cloud_url acts like the path to the local folder (e.g., "quiz_answers_named_a1_to_a25")
 
-    Raises:
-        requests.RequestException: If a file cannot be downloaded due to a network issue or invalid URL.
-    """
-    # check if folder exists if not create it
     if not os.path.exists(path_to_data_folder):
         os.makedirs(path_to_data_folder)
 
-    # loop over each respondent index and change name
     for i in range(1, respondent_index + 1):
-        url = f"{cloud_url}/a{i}.txt"
-        save_path = os.path.join(path_to_data_folder, f"answers_respondent_{i}.txt")
-        if not os.path.exists(save_path):
-            try:
-                response = requests.get(url)
-                response.raise_for_status()
+        src_file = os.path.join(source_folder, f"a{i}.txt")
+        dst_file = os.path.join(path_to_data_folder, f"answers_respondent_{i}.txt")
 
-                with open(save_path, 'w', encoding='utf-8') as file:
-                    file.write(response.text)
-                print(f"Saved: {save_path}")
-                
-            except requests.RequestException as e:
-                print(f"Failed: {url}: {e}")
-                raise
-
-    return path_to_data_folder
+        if os.path.exists(src_file):
+            with open(src_file, 'r', encoding='utf-8') as src, open(dst_file, 'w', encoding='utf-8') as dst:
+                dst.write(src.read())
+            print(f"Copied: {src_file} → {dst_file}")
+        else:
+            print(f"Missing: {src_file}")
 
 
 def collate_answer_files(data_folder_path):
@@ -69,3 +56,5 @@ Creates:
     print(f"Collated answers saved in {output_file}")
     return output_file
 
+download_answer_files("quiz_answers_named_a1_to_a25", "data", 25)
+collate_answer_files("data")
