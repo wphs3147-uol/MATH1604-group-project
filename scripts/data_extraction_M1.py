@@ -22,5 +22,3 @@ def extract_answers_sequence(file_path):
 def write_answers_sequence(answers, id):
     with open('answers_list_' + str(id) + '.txt', 'w') as file:
         file.write(str(answers))
-
-print(answers)
