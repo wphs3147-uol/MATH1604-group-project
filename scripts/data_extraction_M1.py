@@ -1,10 +1,11 @@
 def extract_answers_sequence(file_path):
     with open(file_path, 'r') as file:
         answers = file.readlines() # reads file in
+        answers = answers.lower()
     boxlines = []
     for line in answers:
         line = line.strip()
-        if '[ ]' in line or '[x]' in line or '[X]' in line:
+        if '[ ]' in line or '[x]' in line:
             boxlines.append(line) # filters by line with check boxes
     boxes = []
     for line in boxlines:
@@ -21,3 +22,5 @@ def extract_answers_sequence(file_path):
 def write_answers_sequence(answers, id):
     with open('answers_list_' + str(id) + '.txt', 'w') as file:
         file.write(str(answers))
+
+print(answers)
