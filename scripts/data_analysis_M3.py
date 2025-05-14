@@ -74,4 +74,5 @@ def visualize_data(data_folder_path: str, n: int) -> None:
     else:
         print("n must be 1 or 2!")
         
-print(visualise_data(data, n = 1))
+visualise_data("data", 1)
+
