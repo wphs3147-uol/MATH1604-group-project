@@ -1,7 +1,6 @@
 def extract_answers_sequence(file_path):
     with open(file_path, 'r') as file:
-        answers = file.readlines() # reads file in
-        answers = answers.lower()
+        answers = [line.lower() for line in file.readlines()] # reads file in 
     boxlines = []
     for line in answers:
         line = line.strip()
