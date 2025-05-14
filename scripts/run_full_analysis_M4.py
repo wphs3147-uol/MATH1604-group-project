@@ -88,8 +88,10 @@ def visualize_data(file_path, plot_type):
 # Main fucntion
 def main():
     '''
-    this runs the script and shows both plots
-    '''
+Main function that checks for the collated_answers.txt file, then runs the mean calculation
+and displays both a scatter plot of average answers and a line plot of each respondent's answers.
+'''
+
     print("running tm4 integration script...")
 
     if not os.path.exists(collated_file_path):
