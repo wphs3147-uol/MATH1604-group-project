@@ -47,7 +47,7 @@ def generate_means_sequence(data_folder_path: str) -> List[float]:
 
 import matplotlib.pyplot as plt
 
-def visualize_data(data_folder_path: str, n: int) -> None:
+def visualise_data(data_folder_path: str, n: int) -> None:
     if n == 1:
         means = generate_means_sequence(data_folder_path)
         plt.figure(figsize=(12, 5))
