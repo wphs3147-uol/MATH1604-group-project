@@ -1,6 +1,7 @@
 import os
 import numpy as np
 from typing import List
+import matplotlib.pyplot as plt
 
 def extract_answers_sequence(file_path):
     with open(file_path, 'r') as file:
@@ -42,9 +43,12 @@ def generate_means_sequence(data_folder_path: str) -> List[float]:
         else:
             means_sequence.append(0.0) 
 
-    return means_sequence
+    os.makedirs("output", exist_ok=True)
+    with open("output/mean_answers.txt", "w") as f:
+        for i, mean in enumerate(means_sequence, start=1):
+            f.write(f"Q{i}: {mean:.2f}\n")
 
-import matplotlib.pyplot as plt
+    return means_sequence
 
 def visualise_data(data_folder_path: str, n: int) -> None:
     if n == 1:
@@ -74,4 +78,3 @@ def visualise_data(data_folder_path: str, n: int) -> None:
         print("n must be 1 or 2!")
         
 visualise_data("data", 1)
-
