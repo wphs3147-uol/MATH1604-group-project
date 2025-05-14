@@ -1,7 +1,10 @@
 '''
-This script runs the full analysis pipeline for the data.
-It uses collated_answers.txt from the output folder.
-It makes a scatter plot of the average answers and a line plot showing what each respondent answered.
+run_full_analysis_M4.py
+
+This script is written by team member 4 and is responsible for running the full analysis pipeline 
+for the project. It uses the collated_answers.txt file located in the output folder 
+and generates two visualisations, a scatter plot showing the mean answer for each question, 
+and a line plot showing how each respondent answered the questions.
 '''
 
 import os
@@ -17,8 +20,17 @@ collated_file_path = os.path.join("output", "collated_answers.txt")
 #my own version of the function
 def generate_means_sequence(file_path):
     '''
-    this reads the collated_answers.txt file and works out the average answer for each question
+    Reads the collated_answers.txt file and calculates the average answer for each of the 100 questions.
+
+    It processes each respondent’s answer sequence from the file, where answers are separated by "*" symbols. 
+    Unanswered questions are recorded as 0 and excluded from the average calculation. 
+    The final result is a list of 100 mean values, one for each question, which will be used for visualisation.
+
+    The parameter takes a file path which is a string data type.This string is a path to the collated_answers.txt file containing answer sequences.
+
+    This function returns a list of 100 float values representing the mean answer per question.
     '''
+
     question_data = [[] for _ in range(100)]
     respondent_answers = []
 
@@ -45,10 +57,19 @@ def generate_means_sequence(file_path):
 
 def visualize_data(file_path, plot_type):
     '''
-    this shows either the average answer per question or each respondent's answers
-    plot_type 1 = scatter plot of averages
-    plot_type 2 = line plot per respondent
+    This function displays a visualisation of the answer data based on the specified plot type.
+
+    If plot_type is 1, it generates a scatter plot of the average answer per question using
+    the generate_means_sequence function. If plot_type is 2, it generates a line plot for each
+    respondent showing their selected answers across all 100 questions.
+
+    Parameters taken are file_path which is a string that is the path to the collated_answers.txt file 
+    and plot_type which is an integeer and it determines which type of plot to generate - 1 for scatter plot, 2 for line plot.
+
+    Should return None. Displays the plot directly using matplotlib. I found that you need to click on exit after the initial scatter plot
+    displays and then the program continues and produces the line plot and then you have to exit that before the program can complete.
     '''
+
     if plot_type == 1:
         means = generate_means_sequence(file_path)
         plt.figure(figsize=(12, 5))
@@ -88,10 +109,12 @@ def visualize_data(file_path, plot_type):
 # Main fucntion
 def main():
     '''
-Main function that checks for the collated_answers.txt file, then runs the mean calculation
-and displays both a scatter plot of average answers and a line plot of each respondent's answers.
-'''
+    Main function that runs the full integration script.
 
+    It checks if the collated_answers.txt file exists in the output folder.
+    If found, it calculates mean answers, then displays both the scatter plot and line plot.
+    This script avoids calling broken functions and assumes the collated data is already present.
+    '''
     print("running tm4 integration script...")
 
     if not os.path.exists(collated_file_path):
