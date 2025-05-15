@@ -42,8 +42,9 @@ def generate_means_sequence(file_path):
                     if ans != 0:
                         question_data[i].append(ans)
                 respondent_answers = []
-            elif line:
+            elif line.isdigit():
                 respondent_answers.append(int(line))
+
 
     means_sequence = []
     for answers in question_data:
